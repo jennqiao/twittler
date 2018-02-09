@@ -5,19 +5,41 @@
     <script src="data_generator.js"></script>
   </head>
   <body>
+      <h1>Your Twittler Stream</h1>
+      <button>See new tweets</button>
+
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
 
+        $('button').on('click', function(){
+          if (tweetCount < streams.home.length) {
+            console.log('tweetCount:' +tweetCount);
+            console.log('stream:' +streams.home.length)
+
+            console.log("there's newer tweets");
+          }
+
+        });
+
+        var $body = $('body');
         var index = streams.home.length - 1;
+        var tweetCount = 0;
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+
+          //var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: "numeric", minute:'numeric'};
+
+          //var tweetTime = tweet.created_at.toLocaleDateString("en-US");
+          var tweetTime = tweet.created_at.toLocaleString();
+
+
+
+          $tweet.text('@' + tweet.user + ': ' + tweet.message + " "+tweetTime);
           $tweet.appendTo($body);
           index -= 1;
+          tweetCount ++;
         }
 
       });
