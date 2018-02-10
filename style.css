@@ -24,6 +24,7 @@ a {
 
 a:hover {
 	text-decoration: underline;
+	cursor: pointer;
 }
 
 .header {
@@ -74,5 +75,16 @@ a:hover {
 	border: solid 1px #e7eef4;
 	margin-left: 0px;
 	margin-top: 14px;
+}
+
+.back-button {
+	font-size: 11px;
+	font-weight: 500;
+	letter-spacing: 0.9px;
+	text-align: left;
+	padding-top: 5px;
+	color: #5d6b78;
+	margin-left: 35px;
+
 }
 

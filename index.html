@@ -28,7 +28,7 @@
           tweetCount ++;
         }
 
-        
+
         /*
 
         $('button').on('click', function(){
@@ -39,7 +39,7 @@
         });
         */
 
-        $('a').on('click', function(){
+        $(document).on('click', '.header', function(){
           showAll = false;
           var userNameAt = $(this).text();
           userName = userNameAt.slice(1, userNameAt.length);
@@ -57,9 +57,18 @@
            
           }
 
+          $('h1').after('<a class="back-button"><--- See all tweets</a>');
+
+        });
 
 
-          
+        $(document).on('click', '.back-button', function() {
+          showAll = true;
+          userName = '';
+          $('.tweet').remove();
+          $('.back-button').remove();
+          updateTweets(0, streams.home.length);
+
 
         });
 
@@ -68,7 +77,7 @@
            updateTweets(tweetCount, streams.home.length-1);
           }
 
-        }, 4000);
+        }, 10000);
 
 
         function updateTweets (beginning, end) {
