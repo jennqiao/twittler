@@ -1,0 +1,68 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+h1 {
+	height: 98px;
+	background-color: #26badc;
+	font-size: 32px;
+	font-weight: bold;
+	letter-spacing: 5px;
+	text-align: center;
+	color: #ffffff;
+	padding-top: 50px;
+	margin-bottom: 34px;
+
+}
+
+body {
+	font-family: Open Sans;
+}
+
+.header {
+
+	font-size: 18px;
+	font-weight: bold;
+	letter-spacing: 1.5px;
+	color: #27bcdc;
+
+}
+
+.tweetBody {
+	font-size: 13px;
+	font-weight: 300;
+	letter-spacing: 1.5px;
+	text-align: left;
+	color: #5d6b78;
+	padding-top: 10px;
+
+}
+
+.tweet {
+	padding: 15px 34px;
+
+
+}
+
+.timeLog {
+	font-size: 11px;
+	font-weight: 500;
+	letter-spacing: 0.9px;
+	text-align: left;
+	padding-top: 5px;
+	color: #27bcdc;
+}
+
+.line {
+	height: 10px;
+	border: 0;
+	box-shadow: 0 10px 10px -5px #e7eef4 inset;
+
+
+}
+
+.line2 {
+	width: 296px;
+	height: 3px;
+	border: solid 1px #e7eef4;
+	margin-left: 0px;
+	margin-top: 14px;
+}

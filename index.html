@@ -3,10 +3,11 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-      <h1>Your Twittler Stream</h1>
-      <button>See new tweets</button>
+      <h1>My Twittler Stream</h1>
+      
       <div class="tweets"></div>
 
     <script>
@@ -17,44 +18,57 @@
         var index = streams.home.length - 1;
         var tweetCount = 0;
 
-        $('button').on('click', function(){
-          if (tweetCount < streams.home.length) {
-           updateTweets(tweetCount, streams.home.length-1);
-          }
-
-        });
-
-
-        function updateTweets (beginning, end) {
-          //loop through new parts of the home array
-          //starting from tweetCount, going to home.length-1
-          //create tweet with new index
-
-          for (var i = beginning; i< end; i++) {
-
-            var $tweet = createTweet(streams.home[i])
-            $tweet.prependTo($tweets);
-            tweetCount ++;
-          }
-
-
-        }  
-
-        function createTweet (tweet) {
-
-            var $tweet = $('<div></div>');
-            var tweetTime = tweet.created_at.toLocaleString();
-            return $tweet.text('@' + tweet.user + ': ' + tweet.message + " "+tweetTime);
-
-        }
-
-
         while(index >= 0){
           var $tweet = createTweet(streams.home[index]);
           $tweet.appendTo($tweets);
           index -= 1;
           tweetCount ++;
         }
+        /*
+
+        $('button').on('click', function(){
+          if (tweetCount < streams.home.length) {
+           updateTweets(tweetCount, streams.home.length-1);
+          }
+
+        });
+        */
+
+        setInterval(function() {
+          if (tweetCount < streams.home.length) {
+           updateTweets(tweetCount, streams.home.length-1);
+          }
+
+        }, 4000);
+
+
+        function updateTweets (beginning, end) {
+          for (var i = beginning; i< end; i++) {
+            var $tweet = createTweet(streams.home[i])
+            $tweet.prependTo($tweets);
+            tweetCount ++;
+          }
+        }  
+
+        function createTweet (tweet) {
+            var $tweet = $('<div class="tweet"></div>');
+            var $tweetHeader = $('<div class="header"></div>');
+            var $tweetBody = $('<div class="tweetBody"></div>');
+            var tweetTime = tweet.created_at.toLocaleString();
+            var $tweetTime = $('<div class="timeLog"></div>');
+            var $line = $('<hr class="line">');
+            $tweetHeader.text('@' + tweet.user);
+            $tweetTime.text(tweetTime)
+            $tweetBody.text(tweet.message);
+            $tweetHeader.appendTo($tweet);
+            $tweetBody.appendTo($tweet);
+            $tweetTime.appendTo($tweet);
+            $line.appendTo($tweet);
+            return $tweet;
+        }
+
+
+      
 
       });
 
