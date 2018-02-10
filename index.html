@@ -7,37 +7,51 @@
   <body>
       <h1>Your Twittler Stream</h1>
       <button>See new tweets</button>
+      <div class="tweets"></div>
 
     <script>
 
       $(document).ready(function(){
 
+        var $tweets = $('.tweets');
+        var index = streams.home.length - 1;
+        var tweetCount = 0;
+
         $('button').on('click', function(){
           if (tweetCount < streams.home.length) {
-            console.log('tweetCount:' +tweetCount);
-            console.log('stream:' +streams.home.length)
-
-            console.log("there's newer tweets");
+           updateTweets(tweetCount, streams.home.length-1);
           }
 
         });
 
-        var $body = $('body');
-        var index = streams.home.length - 1;
-        var tweetCount = 0;
+
+        function updateTweets (beginning, end) {
+          //loop through new parts of the home array
+          //starting from tweetCount, going to home.length-1
+          //create tweet with new index
+
+          for (var i = beginning; i< end; i++) {
+
+            var $tweet = createTweet(streams.home[i])
+            $tweet.prependTo($tweets);
+            tweetCount ++;
+          }
+
+
+        }  
+
+        function createTweet (tweet) {
+
+            var $tweet = $('<div></div>');
+            var tweetTime = tweet.created_at.toLocaleString();
+            return $tweet.text('@' + tweet.user + ': ' + tweet.message + " "+tweetTime);
+
+        }
+
+
         while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-
-          //var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: "numeric", minute:'numeric'};
-
-          //var tweetTime = tweet.created_at.toLocaleDateString("en-US");
-          var tweetTime = tweet.created_at.toLocaleString();
-
-
-
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + " "+tweetTime);
-          $tweet.appendTo($body);
+          var $tweet = createTweet(streams.home[index]);
+          $tweet.appendTo($tweets);
           index -= 1;
           tweetCount ++;
         }
