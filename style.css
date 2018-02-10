@@ -17,6 +17,15 @@ body {
 	font-family: Open Sans;
 }
 
+a {
+	text-decoration: none;
+
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
 .header {
 
 	font-size: 18px;
@@ -66,3 +75,4 @@ body {
 	margin-left: 0px;
 	margin-top: 14px;
 }
+

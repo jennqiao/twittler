@@ -17,6 +17,9 @@
         var $tweets = $('.tweets');
         var index = streams.home.length - 1;
         var tweetCount = 0;
+        var showAll = true;
+        var userName = '';
+
 
         while(index >= 0){
           var $tweet = createTweet(streams.home[index]);
@@ -24,6 +27,8 @@
           index -= 1;
           tweetCount ++;
         }
+
+        
         /*
 
         $('button').on('click', function(){
@@ -33,6 +38,30 @@
 
         });
         */
+
+        $('a').on('click', function(){
+          showAll = false;
+          var userNameAt = $(this).text();
+          userName = userNameAt.slice(1, userNameAt.length);
+
+          //$('.tweet').filter(function(){ return $(this).find('.header').text() === userNameAt;}).css( "border-color", "red" );
+          //$('.tweet').filter(".header");
+
+          $('.tweet').remove();
+
+          for (var i = 0; i< streams.home.length; i++) {
+            if (streams.home[i].user === userName) {
+              var $tweet = createTweet(streams.home[i])
+              $tweet.prependTo($tweets);
+            }
+           
+          }
+
+
+
+          
+
+        });
 
         setInterval(function() {
           if (tweetCount < streams.home.length) {
@@ -44,15 +73,25 @@
 
         function updateTweets (beginning, end) {
           for (var i = beginning; i< end; i++) {
-            var $tweet = createTweet(streams.home[i])
-            $tweet.prependTo($tweets);
-            tweetCount ++;
+            if (showAll) {
+              var $tweet = createTweet(streams.home[i])
+              $tweet.prependTo($tweets);
+              tweetCount ++;
+            }
+            else {
+              if (streams.home[i].user === userName) {
+                var $tweet = createTweet(streams.home[i])
+                $tweet.prependTo($tweets);
+                tweetCount ++;
+              }
+            }
+           
           }
         }  
 
         function createTweet (tweet) {
             var $tweet = $('<div class="tweet"></div>');
-            var $tweetHeader = $('<div class="header"></div>');
+            var $tweetHeader = $('<a class="header"></a>');
             var $tweetBody = $('<div class="tweetBody"></div>');
             var tweetTime = tweet.created_at.toLocaleString();
             var $tweetTime = $('<div class="timeLog"></div>');
